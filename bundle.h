@@ -1,0 +1,19 @@
+
+#ifndef GAMESTOP_BUNDLE_H
+#define GAMESTOP_BUNDLE_H
+#include "videogame.h"
+#include "console.h"
+class Bundle : public Videogame, public Console {
+    float discount;
+    int* days_available;
+public:
+    Bundle();
+    Bundle(float discount,int days_available,Videogame game, Console console);
+    Bundle(const Bundle &);
+    ~Bundle();
+    Bundle& operator=(const Bundle &);
+    void display() override;
+    void price_discount();
+    int get_days_available();
+};
+#endif //GAMESTOP_BUNDLE_H
