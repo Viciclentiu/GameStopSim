@@ -11,11 +11,12 @@
 class Merchandise : public Product {
 private:
     std::string type;
-    std::string brand_origin;
+    std::string game_origin;
 public:
     Merchandise();
-    Merchandise(std::string type, std::string brand_origin);
+    Merchandise(std::string type, std::string game_origin);
     Merchandise(const Merchandise& merch);
+    ~Merchandise();
     Merchandise& operator=(const Merchandise& merch);
 
 };

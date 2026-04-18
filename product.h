@@ -10,6 +10,7 @@ protected:
     public:
     Product();
     Product(int stock_price, int stock_quantity);
+    Product(const Product&);
     virtual ~Product();
     virtual void display() =0;
     Product &operator=(const Product &);
