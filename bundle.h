@@ -10,12 +10,12 @@ private:
     std::vector<int> days_available;
 public:
     Bundle();
-    Bundle(float discount,int days_available,Videogame game, Console console);
+    Bundle(float discount,std::vector<int> &days_available,Videogame &game, Console &console);
     Bundle(const Bundle &);
     ~Bundle();
     Bundle& operator=(const Bundle &);
     void display() override;
-    void price_discount();
+    float price_discount();
     int get_days_available();
 };
 #endif //GAMESTOP_BUNDLE_H

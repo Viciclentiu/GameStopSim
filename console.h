@@ -2,17 +2,17 @@
 #ifndef GAMESTOP_CONSOLE_H
 #define GAMESTOP_CONSOLE_H
 #include <string>
-
+#include <vector>
 #include "product.h"
 
 class Console : public virtual Product {
 protected:
     std::string name;
     std::string description;
-    std::string specs;
+    std::vector<std::string> specs;
 public:
     Console();
-    Console(std::string name,std::string description, std::string specs,int stock_price, int stock_quantity);
+    Console(std::string name,std::string description, std::vector<std::string> specs,int stock_price, int stock_quantity);
     virtual ~Console();
     Console(const Console &);
     Console &operator=(const Console &);

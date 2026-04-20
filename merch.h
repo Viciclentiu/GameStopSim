@@ -14,7 +14,7 @@ private:
     std::string game_origin;
 public:
     Merchandise();
-    Merchandise(std::string type, std::string game_origin);
+    Merchandise(std::string type, std::string game_origin,int stock_price,int stock_quantity);
     Merchandise(const Merchandise& merch);
     ~Merchandise();
     Merchandise& operator=(const Merchandise& merch);
