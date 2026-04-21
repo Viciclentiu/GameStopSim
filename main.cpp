@@ -148,6 +148,14 @@ Bundle& Bundle::operator=(const Bundle& obj) {
     return *this;
 }
 
+void Bundle::display() {
+    std::cout<<this->discount<<'\n';
+    std::cout<<"Available days:"<<'\n';
+    for (int i=0;i<this->days_available.size();i++) {
+        std::cout<<this->days_available[i]<<'\n';
+    }
+}
+
 Merchandise::Merchandise(): Product() {
     this->type="None";
     this->game_origin="None";
@@ -169,7 +177,7 @@ Merchandise& Merchandise::operator=(const Merchandise &obj) {
     Product::operator=(obj);
     this->type=obj.type;
     this->game_origin=obj.game_origin;
-
+    return *this;
 }
 
 int main() {
