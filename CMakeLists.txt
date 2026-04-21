@@ -8,4 +8,5 @@ add_executable(GameStop main.cpp
         videogame.h
         console.h
         bundle.h
-        merch.h)
+        merch.h
+        customer.h)

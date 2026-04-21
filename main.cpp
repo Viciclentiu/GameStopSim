@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <algorithm>
+#include "customer.h"
 #include "videogame.h"
 #include "console.h"
 #include "bundle.h"
@@ -51,6 +52,9 @@ Videogame::Videogame(const Videogame& obj) : Product(obj) {
         this->compatible_consoles.push_back(obj.compatible_consoles[i]);
     }
 }
+
+Videogame::~Videogame() {}
+
 Videogame& Videogame::operator=(const Videogame& obj) {
     if (this == &obj) {
         return *this;
@@ -95,6 +99,9 @@ Console::Console(const Console& obj) : Product(obj) {
         this->specs.push_back(obj.specs[i]);
     }
 }
+
+Console::~Console() {}
+
 Console& Console::operator=(const Console& obj) {
     if (this == &obj) {
         return *this;
@@ -129,6 +136,8 @@ Bundle::Bundle(float discount, std::vector<int> &days_available, Videogame &game
     }
 }
 
+Bundle::~Bundle() {}
+
 Bundle::Bundle(const Bundle &obj) : Videogame(obj),Console(obj) {
     this->discount = obj.discount;
     for (int i=0;i<obj.days_available.size();i++) {
@@ -155,6 +164,14 @@ void Bundle::display() {
         std::cout<<this->days_available[i]<<'\n';
     }
 }
+float Bundle::price_discount() {
+    return (this->get_price_per_product()+this->get_price_per_product()*discount);
+}
+
+int Bundle::get_last_day_available() {
+    sort(this->days_available.begin(),this->days_available.end());
+    return this->days_available.back();
+}
 
 Merchandise::Merchandise(): Product() {
     this->type="None";
@@ -170,6 +187,9 @@ Merchandise::Merchandise(const Merchandise &merch):Product(merch) {
     this->type=merch.type;
     this->game_origin=merch.game_origin;
 }
+
+Merchandise::~Merchandise() {}
+
 Merchandise& Merchandise::operator=(const Merchandise &obj) {
     if (this == &obj) {
         return *this;
@@ -180,6 +200,61 @@ Merchandise& Merchandise::operator=(const Merchandise &obj) {
     return *this;
 }
 
+Customer::Customer() {
+    this->name="None";
+    this->wallet=0.0;
+    this->preferences.push_back("None");
+    Console* console = new Console();
+    this->owned_consoles.push_back(console);
+    delete console;
+}
+
+Customer::Customer(std::string name, float wallet, std::vector<std::string> preferences, std::vector<Console *> &owned_consoles) {
+    this->name=name;
+    this->wallet=wallet;
+    for (int i=0;i<preferences.size();i++) {
+        this->preferences.push_back(preferences[i]);
+    }
+    for (int i=0;i<owned_consoles.size();i++) {
+        this->owned_consoles.push_back(new Console(*owned_consoles[i]));
+    }
+}
+
+Customer::Customer(const Customer &customer) {
+    this->name=customer.name;
+    this->wallet=customer.wallet;
+    for (int i=0;i<customer.preferences.size();i++) {
+        this->preferences.push_back(customer.preferences[i]);
+    }
+    for (int i=0;i<customer.owned_consoles.size();i++) {
+        this->owned_consoles.push_back(new Console(*customer.owned_consoles[i]));
+    }
+
+}
+
+Customer::~Customer() {
+    for (int i=0;i<this->owned_consoles.size();i++) {
+        delete this->owned_consoles[i];
+    }
+}
+Customer& Customer::operator=(const Customer &obj) {
+    if (this == &obj) {
+        return *this;
+    }
+    this->name=obj.name;
+    this->wallet=obj.wallet;
+
+    for (int i=0;i<obj.preferences.size();i++) {
+        this->preferences.push_back(obj.preferences[i]);
+    }
+    for (int i=0;i<this->owned_consoles.size();i++) {
+        delete this->owned_consoles[i];
+    }
+    for (int i=0;i<obj.owned_consoles.size();i++) {
+        this->owned_consoles.push_back(new Console(*obj.owned_consoles[i]));
+    }
+    return *this;
+}
 int main() {
     std::cout<<"Wlcome to GameStop";
     return 0;

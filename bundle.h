@@ -16,6 +16,6 @@ public:
     Bundle& operator=(const Bundle &);
     void display() override;
     float price_discount();
-    int get_days_available();
+    int get_last_day_available();
 };
 #endif //GAMESTOP_BUNDLE_H
