@@ -1,0 +1,27 @@
+#include "product.h"
+int Product::product_no =0;
+Product::Product() : product_id(++product_no) {
+    this->stock_price = 0;
+    this->stock_quantity = 0;
+}
+
+Product::Product(int stock_price, int stock_quantity): product_id(++product_no) {
+    this->stock_price = stock_price;
+    this->stock_quantity = stock_quantity;
+}
+Product::Product(const Product& obj): product_id(++product_no) {
+    this->stock_price = obj.stock_price;
+    this->stock_quantity = obj.stock_quantity;
+}
+Product:: ~Product(){}
+Product& Product::operator=(const Product& obj) {
+    if (this == &obj) {
+        return *this;
+    }
+    this->stock_price = obj.stock_price;
+    this->stock_quantity = obj.stock_quantity;
+    return *this;
+}
+float Product::get_price_per_product() {
+    return stock_price / stock_quantity;
+}
