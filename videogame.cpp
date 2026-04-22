@@ -46,3 +46,6 @@ void Videogame::display() {
     }
     std::cout<<"Price: $"<<this->get_price_per_product()<<'\n';
 }
+std::string Videogame::get_genre() {
+    return this->genre;
+}

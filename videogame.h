@@ -15,6 +15,7 @@ public:
     virtual ~Videogame();
     Videogame &operator=(const Videogame &);
     Videogame(const Videogame& obj);
+    std::string get_genre();
     void display() override;
 };
 #endif //GAMESTOP_VIDEOGAME_H

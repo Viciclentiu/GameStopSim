@@ -10,7 +10,7 @@ private:
     float wallet;
     std::vector<std::string> preferences;
     std::vector<Console*> owned_consoles;
-    public:
+public:
     Customer();
     Customer(std::string name, float wallet, std::vector<std::string> preferences,std::vector<Console*> &owned_consoles);
     Customer(const Customer &customer);

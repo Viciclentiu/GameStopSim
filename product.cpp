@@ -25,3 +25,14 @@ Product& Product::operator=(const Product& obj) {
 float Product::get_price_per_product() {
     return stock_price / stock_quantity;
 }
+void Product::set_stock_quantity(int quantity) {
+    float price = this->get_price_per_product();
+    this->stock_quantity = quantity;
+    this->stock_price= price * quantity;
+}
+void Product::reduce_stock(int amount) {
+    float initial_price = this->get_price_per_product();
+    this->stock_quantity -= amount;
+    this->stock_price = initial_price * this->stock_quantity;
+
+}

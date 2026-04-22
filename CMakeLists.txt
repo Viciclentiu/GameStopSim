@@ -16,4 +16,6 @@ add_executable(GameStop main.cpp
         bundle.cpp
         merch.cpp
         customer.cpp
+        menu.h
+        menu.cpp
 )

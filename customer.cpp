@@ -1,14 +1,18 @@
 #include "customer.h"
+#include "merch.h"
+
 #include <vector>
 #include <string>
 #include <iostream>
+
+#include "videogame.h"
+
 Customer::Customer() {
     this->name="None";
     this->wallet=0.0;
     this->preferences.push_back("None");
     Console* console = new Console();
     this->owned_consoles.push_back(console);
-    delete console;
 }
 
 Customer::Customer(std::string name, float wallet, std::vector<std::string> preferences, std::vector<Console *> &owned_consoles) {
@@ -45,7 +49,7 @@ Customer& Customer::operator=(const Customer &obj) {
     }
     this->name=obj.name;
     this->wallet=obj.wallet;
-
+    this->preferences.clear();
     for (int i=0;i<obj.preferences.size();i++) {
         this->preferences.push_back(obj.preferences[i]);
     }
@@ -60,9 +64,20 @@ Customer& Customer::operator=(const Customer &obj) {
 bool Customer::decide_purchase(Product* p) {
     float market_cap = p->get_price_per_product();
     // VAT is 20% in Romania for some reason
-    if (this->wallet >= market_cap * 1.2)
-        return true;
-    return false;
+    if (this->wallet <= market_cap * 1.2) {
+        return false;
+    }
+    if (Videogame* v = dynamic_cast<Videogame*>(p)) {
+        for (std::string& pref : this->preferences) {
+            if (v->get_genre() == pref) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 float Customer::calculate_satisfaction(std::vector<Product*>& cart) {
     int purchased_products=0;
@@ -75,9 +90,14 @@ float Customer::calculate_satisfaction(std::vector<Product*>& cart) {
 }
 
 float Customer::trade_in(Product *p) {
-    float market_value = p->get_price_per_product();
-    if (this->wallet <50.0) {
-        return (float) market_value * 0.6;
+    float base_value = p->get_price_per_product();
+    float offer = base_value * 0.7;
+    if (this->wallet < 20.0f) {
+        offer *= 0.85;
     }
-    return market_value * 0.8;
+    if (dynamic_cast<Merchandise*>(p)) {
+        offer *= 0.5;
+    }
+
+    return offer;
 }

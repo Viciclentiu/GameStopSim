@@ -15,5 +15,7 @@ protected:
     virtual void display() =0;
     Product &operator=(const Product &);
     float get_price_per_product();
+    void set_stock_quantity(int stock_quantity);
+    void reduce_stock(int amount);
 };
 #endif //GAMESTOP_PRODUCT_H
