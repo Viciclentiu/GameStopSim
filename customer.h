@@ -1,7 +1,3 @@
-//
-// Created by Admin on 21/04/2026.
-//
-
 #ifndef GAMESTOP_CUSTOMER_H
 #define GAMESTOP_CUSTOMER_H
 #include <string>
@@ -20,8 +16,8 @@ private:
     Customer(const Customer &customer);
     ~Customer();
     Customer& operator=(const Customer &customer);
-    bool decide_purchase(Product* p,float current_market_price);
-    float calculate_satisfaction(std::vector<Product*> cart);
+    bool decide_purchase(Product* p);
+    float calculate_satisfaction(std::vector<Product*>& cart);
     float trade_in(Product* p);
 };
 #endif //GAMESTOP_CUSTOMER_H

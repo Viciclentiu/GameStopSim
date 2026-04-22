@@ -39,7 +39,7 @@
 
 # debug information files
 *.dwo
-*.xml
+Unnamed.run.xml
 cmake-build-debug/
 .idea/
 .run/
