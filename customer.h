@@ -9,15 +9,17 @@ private:
     std::string name;
     float wallet;
     std::vector<std::string> preferences;
-    std::vector<Console*> owned_consoles;
+    std::vector<std::string> owned_consoles;
 public:
     Customer();
-    Customer(std::string name, float wallet, std::vector<std::string> preferences,std::vector<Console*> &owned_consoles);
+    Customer(std::string name, float wallet, std::vector<std::string> preferences,std::vector<std::string> owned_consoles);
     Customer(const Customer &customer);
     ~Customer();
     Customer& operator=(const Customer &customer);
     bool decide_purchase(Product* p);
     float calculate_satisfaction(std::vector<Product*>& cart);
     float trade_in(Product* p);
+    std::string get_name();
+    float get_wallet();
 };
 #endif //GAMESTOP_CUSTOMER_H

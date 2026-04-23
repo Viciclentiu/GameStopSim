@@ -51,8 +51,40 @@ void Menu::add_product() {
             break;
     }
 }
-Product* Menu::make_bundle(Videogame*v,Console* p) {
+void Menu::make_bundle() {
     Product* bundle = new Bundle();
     ///cin>>bundle
-    return bundle;
+    this->inventory.push_back(bundle);
+}
+
+
+void Menu::customer_visit() {
+    Customer visitor("Gioni", rand()%1000,{"Survival","Horror"},{"PS5"});
+    std::cout<<"Customer:" << visitor.get_name()<<"has entered the store with $" <<visitor.get_wallet()<<'\n';
+    bool bought= false;
+    float profit=0;
+    std::vector<Product*> cart;
+    for (Product * p : inventory) {
+        if (p->get_stock_quantity()<=0)
+            continue;
+        if (visitor.decide_purchase(p)) {
+            p->reduce_stock(1);
+            cart.push_back(p);
+            profit+= p->get_price_per_product()*1.2;
+            bought= true;
+            std::cout<<"[Sale]" << visitor.get_name()<<"bought ";
+            p->display();
+            if (visitor.get_wallet() <= 0) {
+                break;
+            }
+        }
+    }
+    if (!bought) {
+        std::cout<< "The customer didn't buy anything";
+    }
+    else {
+        this->funds += profit;
+        std::cout<<"Day's over. What you earned: "<< profit<<" USD\n";
+    }
+
 }

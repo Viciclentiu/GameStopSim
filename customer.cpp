@@ -11,18 +11,17 @@ Customer::Customer() {
     this->name="None";
     this->wallet=0.0;
     this->preferences.push_back("None");
-    Console* console = new Console();
-    this->owned_consoles.push_back(console);
+    this->owned_consoles.push_back("None");
 }
 
-Customer::Customer(std::string name, float wallet, std::vector<std::string> preferences, std::vector<Console *> &owned_consoles) {
+Customer::Customer(std::string name, float wallet, std::vector<std::string> preferences, std::vector<std::string> owned_consoles) {
     this->name = name;
     this->wallet=wallet;
     for(int i=0;i<preferences.size();i++) {
         this->preferences.push_back(preferences[i]);
     }
     for(int i=0;i<owned_consoles.size();i++) {
-        this->owned_consoles.push_back(new Console(*owned_consoles[i]));
+        this->owned_consoles.push_back(owned_consoles[i]);
     }
 }
 
@@ -33,16 +32,12 @@ Customer::Customer(const Customer &customer) {
         this->preferences.push_back(customer.preferences[i]);
     }
     for(int i=0;i<customer.owned_consoles.size();i++) {
-        this->owned_consoles.push_back(new Console(*customer.owned_consoles[i]));
+        this->owned_consoles.push_back(customer.owned_consoles[i]);
     }
 
 }
 
-Customer::~Customer() {
-    for (int i=0;i<this->owned_consoles.size();i++) {
-        delete this->owned_consoles[i];
-    }
-}
+Customer::~Customer() {}
 Customer& Customer::operator=(const Customer &obj) {
     if (this == &obj) {
         return *this;
@@ -53,11 +48,9 @@ Customer& Customer::operator=(const Customer &obj) {
     for (int i=0;i<obj.preferences.size();i++) {
         this->preferences.push_back(obj.preferences[i]);
     }
-    for (int i=0;i<this->owned_consoles.size();i++) {
-        delete this->owned_consoles[i];
-    }
+    this->owned_consoles.clear();
     for (int i=0;i<obj.owned_consoles.size();i++) {
-        this->owned_consoles.push_back(new Console(*obj.owned_consoles[i]));
+        this->owned_consoles.push_back(obj.owned_consoles[i]);
     }
     return *this;
 }
@@ -100,4 +93,10 @@ float Customer::trade_in(Product *p) {
     }
 
     return offer;
+}
+std::string Customer::get_name() {
+    return this->name;
+}
+float Customer::get_wallet() {
+    return this->wallet;
 }

@@ -16,7 +16,7 @@ private:
     void displayMenu();
     void add_product();
     void customer_visit();
-    Product* make_bundle(Videogame* v, Console *p);
+    void make_bundle();
 public:
     Menu();
     ~Menu();

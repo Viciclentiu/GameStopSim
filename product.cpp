@@ -36,3 +36,6 @@ void Product::reduce_stock(int amount) {
     this->stock_price = initial_price * this->stock_quantity;
 
 }
+int Product::get_stock_quantity() {
+    return this->stock_quantity;
+}
