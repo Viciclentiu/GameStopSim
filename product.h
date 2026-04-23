@@ -1,6 +1,8 @@
 //
 #ifndef GAMESTOP_PRODUCT_H
 #define GAMESTOP_PRODUCT_H
+#include <iosfwd>
+
 class Product {
 protected:
     const int product_id;
@@ -18,5 +20,7 @@ protected:
     int get_stock_quantity();
     void set_stock_quantity(int stock_quantity);
     void reduce_stock(int amount);
+    virtual void read(std::istream& is);
+    friend std::istream& operator>>(std::istream& in, Product& p);
 };
 #endif //GAMESTOP_PRODUCT_H

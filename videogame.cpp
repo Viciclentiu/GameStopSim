@@ -49,3 +49,23 @@ void Videogame::display() {
 std::string Videogame::get_genre() {
     return this->genre;
 }
+std::istream& operator>>(std::istream& is,Videogame& obj) {
+    std::cout<<"Enter name:\n";
+    is>>obj.name;
+    std::cout<<"Enter genre:\n";
+    is>>obj.genre;
+    std::cout<<"Enter compatible consoles:\n";
+    int n;
+    std::string console;
+    is>>n;
+
+    for (int i=0;i<n;i++) {
+        is>>console;
+        obj.compatible_consoles.push_back(console);
+    }
+    std::cout<<"Enter stock:\n";
+    is>>obj.stock_quantity;
+    std::cout<<"Enter stock price:\n";
+    is>>obj.stock_price;
+    return is;
+}

@@ -6,8 +6,8 @@ Merchandise::Merchandise(): Product() {
 }
 
 Merchandise::Merchandise(std::string type, std::string game_origin,int stock_price,int stock_quantity): Product(stock_price,stock_quantity) {
-    this->type=type;
-    this->game_origin=game_origin;
+    this->type = type;
+    this->game_origin = game_origin;
 }
 
 Merchandise::Merchandise(const Merchandise &merch):Product(merch) {
@@ -29,4 +29,14 @@ Merchandise& Merchandise::operator=(const Merchandise &obj) {
 void Merchandise::display() {
     std::cout<<this->type<<'\n';
     std::cout<<this->game_origin<<'\n';
+}
+std::istream &operator>>(std::istream &is,Merchandise& merch) {
+    std::string type, game_origin;
+    int stock_price, stock_quantity;
+    is>>type>>game_origin>>stock_price>>stock_quantity;
+    merch.type=type;
+    merch.game_origin=game_origin;
+    merch.stock_price= stock_price;
+    merch.stock_quantity=stock_quantity;
+    return is;
 }

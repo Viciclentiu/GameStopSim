@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "product.h"
+#include "videogame.h"
 
 class Console : public virtual Product {
 protected:
@@ -17,5 +18,6 @@ public:
     Console(const Console &);
     Console &operator=(const Console &);
     void display() override;
+    friend std::istream& operator>>(std::istream& is,Console& obj);
 };
 #endif //GAMESTOP_CONSOLE_H

@@ -1,4 +1,5 @@
 #include "product.h"
+#include <iostream>
 int Product::product_no =0;
 Product::Product() : product_id(++product_no) {
     this->stock_price = 0;
@@ -38,4 +39,8 @@ void Product::reduce_stock(int amount) {
 }
 int Product::get_stock_quantity() {
     return this->stock_quantity;
+}
+void Product::read(std::istream& in) {
+    std::cout << "Price: "; in >> stock_price;
+    std::cout << "Stock: "; in >> stock_quantity;
 }

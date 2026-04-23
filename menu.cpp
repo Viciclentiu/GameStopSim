@@ -39,14 +39,14 @@ void Menu::add_product() {
         case 1: {
             Product* merch = new Merchandise();
             ///TODO operator >> for all product derived classes
-            //std::cin>>merch;
+            std::cin>>merch;
             this->inventory.push_back(merch);
             break;
         }
 
         case 2: {
             Product * videogame = new Videogame();
-            //std::cin>>videogame;
+            std::cin >> *videogame;
             this->inventory.push_back(videogame);
             break;
         }
@@ -108,8 +108,10 @@ void Menu::customer_visit() {
 
 void Menu::run() {
     int choice;
+
     while (running) {
         this->displayMenu();
+        std::cin>>choice;
         ///try catch here
         switch (choice) {
             case 1: {

@@ -17,5 +17,6 @@ public:
     Videogame(const Videogame& obj);
     std::string get_genre();
     void display() override;
+    friend std::istream& operator>>(std::istream& is,Videogame& obj);
 };
 #endif //GAMESTOP_VIDEOGAME_H
