@@ -1,4 +1,5 @@
 #include "merch.h"
+#include <iostream>
 Merchandise::Merchandise(): Product() {
     this->type="None";
     this->game_origin="None";
@@ -24,4 +25,8 @@ Merchandise& Merchandise::operator=(const Merchandise &obj) {
     this->type=obj.type;
     this->game_origin=obj.game_origin;
     return *this;
+}
+void Merchandise::display() {
+    std::cout<<this->type<<'\n';
+    std::cout<<this->game_origin<<'\n';
 }

@@ -18,6 +18,6 @@ public:
     Merchandise(const Merchandise& merch);
     ~Merchandise();
     Merchandise& operator=(const Merchandise& merch);
-
+    void display();
 };
 #endif //GAMESTOP_MERCH_H
