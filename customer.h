@@ -21,5 +21,6 @@ public:
     float trade_in(Product* p);
     std::string get_name();
     float get_wallet();
+    void set_wallet(float new_wallet);
 };
 #endif //GAMESTOP_CUSTOMER_H

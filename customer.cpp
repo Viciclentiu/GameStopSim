@@ -100,3 +100,6 @@ std::string Customer::get_name() {
 float Customer::get_wallet() {
     return this->wallet;
 }
+void Customer::set_wallet(float new_ammount) {
+    this->wallet = new_ammount;
+}

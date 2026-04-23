@@ -1,4 +1,14 @@
 #include "menu.h"
+Menu::~Menu() {
+    for (Product * p : inventory) {
+        delete p;
+    }
+}
+Menu::Menu() {
+    this->inventory.clear();
+    this->funds = 0.0;
+    this->running = true;
+}
 void Menu::displayMenu() {
     std::cout<<"WELCOME TO:\n";
     std::cout<<R"(
@@ -59,7 +69,7 @@ void Menu::make_bundle() {
 
 
 void Menu::customer_visit() {
-    Customer visitor("Gioni", rand()%1000,{"Survival","Horror"},{"PS5"});
+    Customer visitor("Gioni", rand()%100,{"Survival","Horror"},{"PS5"});
     std::cout<<"Customer:" << visitor.get_name()<<"has entered the store with $" <<visitor.get_wallet()<<'\n';
     bool bought= false;
     float profit=0;
@@ -70,6 +80,7 @@ void Menu::customer_visit() {
         if (visitor.decide_purchase(p)) {
             p->reduce_stock(1);
             cart.push_back(p);
+            visitor.set_wallet(visitor.get_wallet() - p->get_price_per_product()* 1.2);
             profit+= p->get_price_per_product()*1.2;
             bought= true;
             std::cout<<"[Sale]" << visitor.get_name()<<"bought ";
@@ -79,12 +90,57 @@ void Menu::customer_visit() {
             }
         }
     }
+
     if (!bought) {
         std::cout<< "The customer didn't buy anything";
     }
     else {
         this->funds += profit;
+        float satisfaction = visitor.calculate_satisfaction(cart); // Pasăm coșul de cumpărături
+        std::cout << "Customer satisfaction for this visit: " << satisfaction << "%\n";
+
+        if (satisfaction > 80.0) {
+            std::cout << "Excellent service! The customer might come back.\n";
+        }
         std::cout<<"Day's over. What you earned: "<< profit<<" USD\n";
     }
+}
 
+void Menu::run() {
+    int choice;
+    while (running) {
+        this->displayMenu();
+        ///try catch here
+        switch (choice) {
+            case 1: {
+                this->customer_visit();
+                break;
+            }
+            case 2: {
+                add_product();
+                break;
+            }
+            case 3: {
+                std::cout<<"\n ----CURRENT STOCK ---- \n";
+                for (Product* p : inventory) {
+                    p->display();
+                    std::cout<<"-----------------------\n";
+                }
+                break;
+            }
+            case 4:
+                std::cout<<"Store Funds: $"<<this->funds<<"\n";
+                break;
+            case 5:
+                this->make_bundle();
+                break;
+            case 0:
+                std::cout<<"Exiting program... Goodbye!\n";
+                this->running = false;
+                break;
+            default:
+                std::cout<<"Invalid choice. Please try again!\n";
+                break;
+        }
+    }
 }
