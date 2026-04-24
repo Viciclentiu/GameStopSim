@@ -46,3 +46,19 @@ void Console::display() {
         std::cout<<this->specs[i]<<'\n';
     }
 }
+std::istream& operator>>(std::istream& is, Console& obj) {
+    std::string name;
+    std::string description;
+    std::vector<std::string> specs;
+    getline(is,name);
+    getline(is,description);
+    int n;
+    is>>n;
+    std::string spec;
+    for (int i=0;i<n;i++) {
+        getline(is,spec);
+        specs.push_back(spec);
+    }
+    is>>(Product&) obj;
+    return is;
+}

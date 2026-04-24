@@ -17,5 +17,6 @@ public:
     void display() override;
     float price_discount();
     int get_last_day_available();
+    friend std::istream& operator>>(std::istream& is,Bundle& obj);
 };
 #endif //GAMESTOP_BUNDLE_H

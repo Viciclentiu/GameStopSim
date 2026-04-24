@@ -1,7 +1,7 @@
 //
 #ifndef GAMESTOP_PRODUCT_H
 #define GAMESTOP_PRODUCT_H
-#include <iosfwd>
+#include <iostream>
 
 class Product {
 protected:
@@ -19,8 +19,9 @@ protected:
     float get_price_per_product();
     int get_stock_quantity();
     void set_stock_quantity(int stock_quantity);
+    void set_stock_price(float stock_price);
     void reduce_stock(int amount);
-    virtual void read(std::istream& is);
-    friend std::istream& operator>>(std::istream& in, Product& p);
+
+    friend std::istream& operator>>(std::istream& is, Product& p);
 };
 #endif //GAMESTOP_PRODUCT_H

@@ -51,3 +51,20 @@ int Bundle::get_last_day_available() {
     sort(this->days_available.begin(),this->days_available.end());
     return this->days_available.back();
 }
+std::istream& operator>>(std::istream& is,Bundle& obj) {
+    std::cout<<"Enter the discount:"<<'\n';
+    float discount;
+    is>>discount;
+    obj.discount = discount;
+    std::cout<<"Enter the days available:"<<'\n';
+    int days_available;
+    is>>days_available;
+    for (int i=0;i<days_available;i++) {
+        int day;
+        is>>day;
+        obj.days_available.push_back(day);
+    }
+    is>>(Videogame&) obj;
+    is>>(Console&) obj;
+    return is;
+}

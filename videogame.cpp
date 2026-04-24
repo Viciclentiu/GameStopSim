@@ -50,11 +50,15 @@ std::string Videogame::get_genre() {
     return this->genre;
 }
 std::istream& operator>>(std::istream& is,Videogame& obj) {
-    std::cout<<"Enter name:\n";
-    is>>obj.name;
+    std::string name,genre;
+
+    std::cout<<"Enter video game name:\n";
+    is>>name;
     std::cout<<"Enter genre:\n";
-    is>>obj.genre;
+    is>>genre;
     std::cout<<"Enter compatible consoles:\n";
+    obj.name=name;
+    obj.genre=genre;
     int n;
     std::string console;
     is>>n;
@@ -62,10 +66,8 @@ std::istream& operator>>(std::istream& is,Videogame& obj) {
     for (int i=0;i<n;i++) {
         is>>console;
         obj.compatible_consoles.push_back(console);
-    }
-    std::cout<<"Enter stock:\n";
-    is>>obj.stock_quantity;
-    std::cout<<"Enter stock price:\n";
-    is>>obj.stock_price;
+    };
+    is>>(Product&) obj;
+
     return is;
 }

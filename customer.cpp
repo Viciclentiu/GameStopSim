@@ -103,3 +103,32 @@ float Customer::get_wallet() {
 void Customer::set_wallet(float new_ammount) {
     this->wallet = new_ammount;
 }
+std::istream& operator>>(std::istream& is,Customer& customer) {
+    std::cout<<"Enter customer name:\n";
+    std::string name;
+    getline(is,name);
+    customer.name = name;
+    std::cout<<"Enter wallet:\n";
+    float wallet;
+    std::vector<std::string> preferences;
+    std::vector<std::string> owned_consoles;
+    is>>wallet;
+    is.get();
+    std::cout<<"Enter the number of preferences:\n";
+    int prefs;
+    is>>prefs;
+    is.get();
+    for(int i=0;i<prefs;i++) {
+        std::string preference;
+        getline(is,preference);
+        customer.preferences.push_back(preference);
+    }
+    int no_consoles;
+    std::cout<<"Enter the number of consoles owned:\n";
+    is>>no_consoles;
+    for(int i=0;i<no_consoles;i++) {
+        std::string console;
+        getline(is,console);
+        customer.owned_consoles.push_back(console);
+    }
+}

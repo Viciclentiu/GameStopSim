@@ -22,5 +22,6 @@ public:
     std::string get_name();
     float get_wallet();
     void set_wallet(float new_wallet);
+    friend std::istream& operator>>(std::istream& is,Customer& customer);
 };
 #endif //GAMESTOP_CUSTOMER_H

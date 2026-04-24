@@ -40,7 +40,20 @@ void Product::reduce_stock(int amount) {
 int Product::get_stock_quantity() {
     return this->stock_quantity;
 }
-void Product::read(std::istream& in) {
-    std::cout << "Price: "; in >> stock_price;
-    std::cout << "Stock: "; in >> stock_quantity;
+void Product::set_stock_price(float stock_price) {
+    this->stock_price = stock_price;
+}
+
+
+std::istream& operator>>(std::istream& is, Product& p) {
+    float stock_price;
+    int stock_quantity;
+    std::cout << "Enter stock quantity: ";
+    is >> stock_quantity;
+    std::cout << "Enter price: ";
+    is >> stock_price;
+    p.stock_quantity= stock_quantity;
+    p.stock_price = stock_price;
+
+    return is;
 }

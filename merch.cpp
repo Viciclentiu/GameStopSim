@@ -30,13 +30,13 @@ void Merchandise::display() {
     std::cout<<this->type<<'\n';
     std::cout<<this->game_origin<<'\n';
 }
-std::istream &operator>>(std::istream &is,Merchandise& merch) {
-    std::string type, game_origin;
-    int stock_price, stock_quantity;
-    is>>type>>game_origin>>stock_price>>stock_quantity;
-    merch.type=type;
-    merch.game_origin=game_origin;
-    merch.stock_price= stock_price;
-    merch.stock_quantity=stock_quantity;
+std::istream& operator>>(std::istream& is, Merchandise& p) {
+    std::cout<<"Type:";
+    std::string type,game_origin;
+    getline(is,type);
+    getline(is,game_origin);
+    p.type=type;
+    p.game_origin=game_origin;
+    is>> (Product&) p;
     return is;
 }

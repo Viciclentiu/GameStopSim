@@ -38,8 +38,7 @@ void Menu::add_product() {
     switch (type) {
         case 1: {
             Product* merch = new Merchandise();
-            ///TODO operator >> for all product derived classes
-            std::cin>>merch;
+            std::cin>> *merch;
             this->inventory.push_back(merch);
             break;
         }
@@ -52,7 +51,7 @@ void Menu::add_product() {
         }
         case 3: {
             Product * console = new Console();
-            //std::cin>> console;
+            std::cin >> *console;
             this->inventory.push_back(console);
             break;
         }
@@ -63,7 +62,7 @@ void Menu::add_product() {
 }
 void Menu::make_bundle() {
     Product* bundle = new Bundle();
-    ///cin>>bundle
+    std::cin>> *bundle;
     this->inventory.push_back(bundle);
 }
 
