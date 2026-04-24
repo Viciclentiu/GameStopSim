@@ -32,8 +32,11 @@ void Merchandise::display() {
 }
 std::istream& operator>>(std::istream& is, Merchandise& p) {
     std::cout<<"Type:";
+    is.get();
     std::string type,game_origin;
+
     getline(is,type);
+    std::cout<<"Game origin: ";
     getline(is,game_origin);
     p.type=type;
     p.game_origin=game_origin;

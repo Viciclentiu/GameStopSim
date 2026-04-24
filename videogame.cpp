@@ -51,23 +51,26 @@ std::string Videogame::get_genre() {
 }
 std::istream& operator>>(std::istream& is,Videogame& obj) {
     std::string name,genre;
-
     std::cout<<"Enter video game name:\n";
-    is>>name;
+    is.get();
+    getline(is,name);
+
     std::cout<<"Enter genre:\n";
-    is>>genre;
+    is.get();
+    getline(is,genre);
+    obj.name = name;
+    obj.genre = genre;
     std::cout<<"Enter compatible consoles:\n";
-    obj.name=name;
-    obj.genre=genre;
+
     int n;
     std::string console;
     is>>n;
-
+    is.get();
     for (int i=0;i<n;i++) {
         is>>console;
         obj.compatible_consoles.push_back(console);
     };
-    is>>(Product&) obj;
 
+    is >> static_cast<Product&>(obj);
     return is;
 }

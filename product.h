@@ -21,7 +21,7 @@ protected:
     void set_stock_quantity(int stock_quantity);
     void set_stock_price(float stock_price);
     void reduce_stock(int amount);
-
     friend std::istream& operator>>(std::istream& is, Product& p);
+    friend std::ostream& operator<<(std::ostream& os, const Product& p);
 };
 #endif //GAMESTOP_PRODUCT_H

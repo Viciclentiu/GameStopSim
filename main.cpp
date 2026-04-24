@@ -3,6 +3,7 @@
 #include "menu.h"
 
 int main() {
-    std::cout<<"Welcome to GameStop";
+    Menu menu;
+    menu.run();
     return 0;
 }

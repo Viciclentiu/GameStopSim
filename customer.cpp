@@ -74,6 +74,8 @@ bool Customer::decide_purchase(Product* p) {
 }
 float Customer::calculate_satisfaction(std::vector<Product*>& cart) {
     int purchased_products=0;
+    if (cart.empty())
+        throw std::runtime_error("Cart is empty!");
     for(int i=0;i<cart.size();i++) {
         if (this->decide_purchase(cart[i])) {
             purchased_products++;
@@ -118,6 +120,7 @@ std::istream& operator>>(std::istream& is,Customer& customer) {
     int prefs;
     is>>prefs;
     is.get();
+    std::cout<<"Enter preferences:\n";
     for(int i=0;i<prefs;i++) {
         std::string preference;
         getline(is,preference);
@@ -126,6 +129,7 @@ std::istream& operator>>(std::istream& is,Customer& customer) {
     int no_consoles;
     std::cout<<"Enter the number of consoles owned:\n";
     is>>no_consoles;
+    std::cout<<"Enter consoles\n";
     for(int i=0;i<no_consoles;i++) {
         std::string console;
         getline(is,console);

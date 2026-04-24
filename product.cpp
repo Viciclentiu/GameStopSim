@@ -24,6 +24,8 @@ Product& Product::operator=(const Product& obj) {
     return *this;
 }
 float Product::get_price_per_product() {
+    if (stock_quantity == 0)
+        throw std::runtime_error("Stock quantity is zero, cannot calculate price.");
     return stock_price / stock_quantity;
 }
 void Product::set_stock_quantity(int quantity) {
@@ -46,14 +48,22 @@ void Product::set_stock_price(float stock_price) {
 
 
 std::istream& operator>>(std::istream& is, Product& p) {
-    float stock_price;
-    int stock_quantity;
-    std::cout << "Enter stock quantity: ";
-    is >> stock_quantity;
-    std::cout << "Enter price: ";
-    is >> stock_price;
-    p.stock_quantity= stock_quantity;
-    p.stock_price = stock_price;
+    try {
+        std::string stock_price;
+        std::string stock_quantity;
+        std::cout << "Enter stock quantity: ";
+        is.get();
+        getline(is,stock_quantity);
+        std::cout << "Enter price: ";
+        is.get();
+        getline(is,stock_price);
+        int stock_quant = std::stoi(stock_quantity);
+        float price = std::stof(stock_price);
+        p.stock_quantity= stock_quant;
+        p.stock_price = price;
+    }catch (std::invalid_argument& e) {
+        std::cout<<"Invalid input"<<'\n';
+    }
 
     return is;
 }
