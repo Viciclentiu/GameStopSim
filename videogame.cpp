@@ -37,13 +37,15 @@ Videogame& Videogame::operator=(const Videogame& obj) {
 
     return *this;
 }
-void Videogame::display() {
-    std::cout<<this->name<<'\n';
-    std::cout<<this->genre<<'\n';
-    std::cout<<"Compatible consoles:\n";
+void Videogame::display(std::ostream& cout) {
+    cout<<"Videogame"<<'\n';
+    cout<<this->name<<'\n';
+    cout<<this->genre<<'\n';
+    cout<<"Compatible consoles:\n";
     for (int i=0;i<this->compatible_consoles.size();i++) {
         std::cout<<this->compatible_consoles[i]<<'\n';
     }
+    cout<<this->stock_quantity<<'\n';
     std::cout<<"Price: $"<<this->get_price_per_product()<<'\n';
 }
 std::string Videogame::get_genre() {

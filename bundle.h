@@ -14,7 +14,7 @@ public:
     Bundle(const Bundle &);
     ~Bundle();
     Bundle& operator=(const Bundle &);
-    void display() override;
+    void display(std::ostream& cout) override;
     float price_discount();
     int get_last_day_available();
     friend std::istream& operator>>(std::istream& is,Bundle& obj);

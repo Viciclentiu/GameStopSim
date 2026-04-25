@@ -26,9 +26,12 @@ Merchandise& Merchandise::operator=(const Merchandise &obj) {
     this->game_origin=obj.game_origin;
     return *this;
 }
-void Merchandise::display() {
-    std::cout<<this->type<<'\n';
-    std::cout<<this->game_origin<<'\n';
+void Merchandise::display(std::ostream& cout) {
+    cout<<"Merchandise"<<'\n';
+    cout<<this->type<<'\n';
+    cout<<this->game_origin<<'\n';
+    cout<<this->stock_price<<'\n';
+    cout<<this->stock_quantity<<'\n';
 }
 std::istream& operator>>(std::istream& is, Merchandise& p) {
     std::cout<<"Type:";

@@ -17,7 +17,7 @@ public:
     virtual ~Console();
     Console(const Console &);
     Console &operator=(const Console &);
-    void display() override;
+    void display(std::ostream& cout) override;
     friend std::istream& operator>>(std::istream& is,Console& obj);
 };
 #endif //GAMESTOP_CONSOLE_H

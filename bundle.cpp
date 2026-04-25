@@ -36,9 +36,10 @@ Bundle& Bundle::operator=(const Bundle& obj) {
     return *this;
 }
 
-void Bundle::display() {
-    std::cout<<this->discount<<'\n';
-    std::cout<<"Available days:"<<'\n';
+void Bundle::display(std::ostream& cout) {
+    cout<<"Bundle"<<'\n';
+    cout<<this->discount<<'\n';
+    cout<<"Available days:"<<'\n';
     for (int i=0;i<this->days_available.size();i++) {
         std::cout<<this->days_available[i]<<'\n';
     }
@@ -68,7 +69,7 @@ std::istream& operator>>(std::istream& is,Bundle& obj) {
     } catch (std::invalid_argument& e) {
         std::cout << "Invalid input!\n";
     }
-    is>>(Videogame&) obj;
-    is>>(Console&) obj;
+    operator>>(is, static_cast<Videogame&>(obj));
+    operator>>(is, static_cast<Console&>(obj));
     return is;
 }

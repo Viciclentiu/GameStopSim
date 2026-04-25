@@ -19,6 +19,7 @@ private:
     void customer_visit();
     void make_bundle();
     void save_inventory();
+    void load_inventory();
 public:
     Menu();
     ~Menu();

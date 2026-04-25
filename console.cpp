@@ -38,12 +38,13 @@ Console& Console::operator=(const Console& obj) {
     }
     return *this;
 }
-void Console::display() {
-    std::cout<<this->name<<'\n';
-    std::cout<<this->description<<'\n';
-    std::cout<<"Specifications:"<<'\n';
+void Console::display(std::ostream& cout) {
+    cout<<"Console"<<'\n';
+    cout<<this->name<<'\n';
+    cout<<this->description<<'\n';
+    cout<<"Specifications:"<<'\n';
     for (int i =0; i<this->specs.size();i++) {
-        std::cout<<this->specs[i]<<'\n';
+        cout<<this->specs[i]<<'\n';
     }
 }
 std::istream& operator>>(std::istream& is, Console& obj) {

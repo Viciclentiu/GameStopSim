@@ -18,7 +18,7 @@ public:
     Merchandise(const Merchandise& merch);
     ~Merchandise();
     Merchandise& operator=(const Merchandise& merch);
-    void display();
+    void display(std::ostream& cout);
     friend std::istream& operator>>(std::istream& is, Merchandise& p);
 };
 #endif //GAMESTOP_MERCH_H

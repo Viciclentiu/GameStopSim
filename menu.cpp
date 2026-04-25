@@ -67,11 +67,11 @@ void Menu::add_product() {
     }
 
 }
-void Menu::make_bundle() {
-    Bundle* bundle = new Bundle();
-    std::cin>> *bundle;
-    this->inventory.push_back(bundle);
-}
+    void Menu::make_bundle() {
+        Bundle* bundle = new Bundle();
+        std::cin >> *bundle;
+        this->inventory.push_back(bundle);
+    }
 
 
 void Menu::customer_visit() {
@@ -90,7 +90,7 @@ void Menu::customer_visit() {
             profit+= p->get_price_per_product()*1.2;
             bought= true;
             std::cout<<"[Sale] " << visitor.get_name()<<" bought ";
-            p->display();
+            p->display(std::cout);
             if (visitor.get_wallet() <= 0) {
                 break;
             }
@@ -137,7 +137,7 @@ void Menu::run() {
                 case 3: {
                     std::cout<<"\n ----CURRENT STOCK ---- \n";
                     for (Product* p : inventory) {
-                        p->display();
+                        p->display(std::cout);
                         std::cout<<"-----------------------\n";
                     }
                     break;
@@ -173,8 +173,34 @@ void Menu::save_inventory() {
     }
     fout << inventory.size() << "\n";
     for (Product* p : inventory) {
-        p->display();
+        p->display(fout);
     }
     fout.close();
     std::cout<<"Data saved in " << FILE << "\n";
+}
+void Menu::load_inventory() {
+    const std::string FILE = "inventory.txt";
+    std::ifstream fin(FILE);
+    if (!fin.is_open()) {
+        throw std::runtime_error("Could not open file for reading");
+    }
+    for (auto& p : inventory) {
+        delete p;
+    }
+    inventory.clear();
+    int n;
+    fin >> n;
+    fin.ignore();
+    for (int i=0;i<n;i++) {
+        std::string type;
+        getline(fin, type);
+        if (type == "bundle") {
+            this->make_bundle();
+        }
+        else {
+            this->add_product();
+        }
+    }
+    fin.close();
+    std::cout<<"Loaded inventory\n";
 }
