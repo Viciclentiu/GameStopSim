@@ -46,15 +46,15 @@ void Product::set_stock_price(float stock_price) {
     this->stock_price = stock_price;
 }
 
-void  Product::read(std::istream& is) {
+void  Product::read(std::istream& is,bool file_read) {
     try {
         std::string stock_price;
         std::string stock_quantity;
-        std::cout << "Enter stock quantity: ";
-        is.get();
+        if (!file_read)
+            std::cout << "Enter stock quantity: ";
         getline(is,stock_quantity);
-        std::cout << "Enter price: ";
-        is.get();
+        if (!file_read)
+            std::cout << "Enter price: ";
         getline(is,stock_price);
         int stock_quant = std::stoi(stock_quantity);
         float price = std::stof(stock_price);
@@ -65,7 +65,7 @@ void  Product::read(std::istream& is) {
     }
 }
 std::istream& operator>>(std::istream& is, Product& p) {
-    p.read(is);
+    p.read(is,false);
     return is;
 }
 std:: ostream& operator<<(std::ostream& os, Product &p) {

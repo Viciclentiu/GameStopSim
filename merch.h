@@ -19,7 +19,7 @@ public:
     ~Merchandise();
     Merchandise& operator=(const Merchandise& merch);
     void display(std::ostream& cout);
-    void read(std::istream& is);
+    void read(std::istream& is, bool file_read);
     friend std::istream& operator>>(std::istream& is, Merchandise& p);
     friend std::ostream& operator<<(std::ostream& cout,const Merchandise& p);
 };

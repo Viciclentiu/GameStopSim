@@ -47,32 +47,36 @@ void Console::display(std::ostream& cout) {
         cout<<this->specs[i]<<'\n';
     }
 }
-void Console::read(std::istream& is) {
+void Console::read(std::istream& is,bool file_read) {
     std::string name;
     std::string description;
     std::vector<std::string> specs;
-    std::cout<<"Name: ";
+    if (!file_read)
+        std::cout<<"Name: ";
     is.get();
     getline(is,name);
-    std::cout<<"Description: ";
+    if (!file_read)
+        std::cout<<"Description: ";
     getline(is,description);
     int n;
-    std::cout<<"Number of specs: ";
+    if (!file_read)
+        std::cout<<"Number of specs: ";
     is>>n;
     is.get();
     this->name = name;
     this->description = description;
     std::string spec;
     for (int i=0;i<n;i++) {
-        std::cout<<"Specs: ";
+        if (!file_read)
+            std::cout<<"Specs: ";
         getline(is,spec);
         this->specs.push_back(spec);
     }
-    Product::read(is);
+    Product::read(is,file_read);
 
 }
 std::istream& operator>>(std::istream& is, Console& obj) {
-   obj.read(is);
+   obj.read(is,false);
     return is;
 }
 std::ostream& operator<<(std::ostream& cout, Console& obj) {

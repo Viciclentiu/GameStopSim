@@ -118,7 +118,59 @@ void Menu::customer_visit() {
 
     }
 }
+void Menu::save_inventory() {
+    const std::string FILE = "inventory.txt";
+    std::ofstream fout(FILE);
+    if (!fout.is_open()) {
+        throw std::runtime_error("Could not open file for writing");
+    }
+    fout << inventory.size() << "\n";
+    for (Product* p : inventory) {
+        p->display(fout);
+    }
+    fout<<"test"<<'\n';
+    fout.close();
+    std::cout<<"Data saved in " << FILE << "\n";
 
+}
+void Menu::load_inventory() {
+    const std::string FILE = "inventory.txt";
+    std::ifstream fin(FILE);
+    if (!fin.is_open()) {
+        throw std::runtime_error("Could not open file for reading");
+    }
+    for (auto& p : inventory) {
+        delete p;
+    }
+    inventory.clear();
+    int n;
+    fin >> n;
+    fin.get();
+    for (int i=0;i<n;i++) {
+        std::string type;
+        getline(fin, type);
+        Product* p = nullptr;
+        bool file_read= true;
+        if (type == "Merchandise") {
+            p = new Merchandise();
+        }
+        else if (type == "Videogame") {
+            p = new Videogame();
+        }
+        else if (type == "Console") {
+            p = new Console();
+        }
+        else if (type == "Bundle") {
+            p = new Bundle();
+        }
+        if (p) {
+            p->read(fin,file_read);
+            inventory.push_back(p);
+        }
+    }
+    fin.close();
+    std::cout<<"Loaded inventory\n";
+}
 void Menu::run() {
     int choice;
     std::string input;
@@ -155,6 +207,7 @@ void Menu::run() {
                     break;
                 case 7:
                     this->load_inventory();
+                    break;
                 case 0:
                     std::cout<<"Exiting program... Goodbye!\n";
                     this->running = false;
@@ -171,43 +224,4 @@ void Menu::run() {
         }
 
     }
-}
-void Menu::save_inventory() {
-    const std::string FILE = "inventory.txt";
-    std::ofstream fout(FILE);
-    if (!fout.is_open()) {
-            throw std::runtime_error("Could not open file for writing");
-    }
-    fout << inventory.size() << "\n";
-    for (Product* p : inventory) {
-        p->display(fout);
-    }
-    fout.close();
-    std::cout<<"Data saved in " << FILE << "\n";
-}
-void Menu::load_inventory() {
-    const std::string FILE = "inventory.txt";
-    std::ifstream fin(FILE);
-    if (!fin.is_open()) {
-        throw std::runtime_error("Could not open file for reading");
-    }
-    for (auto& p : inventory) {
-        delete p;
-    }
-    inventory.clear();
-    int n;
-    fin >> n;
-    fin.ignore();
-    for (int i=0;i<n;i++) {
-        std::string type;
-        getline(fin, type);
-        if (type == "bundle") {
-            this->make_bundle();
-        }
-        else {
-            this->add_product();
-        }
-    }
-    fin.close();
-    std::cout<<"Loaded inventory\n";
 }

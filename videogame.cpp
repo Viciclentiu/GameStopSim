@@ -43,44 +43,47 @@ void Videogame::display(std::ostream& cout) {
     cout<<this->genre<<'\n';
     cout<<"Compatible consoles:\n";
     for (int i=0;i<this->compatible_consoles.size();i++) {
-        std::cout<<this->compatible_consoles[i]<<'\n';
+        cout<<this->compatible_consoles[i]<<'\n';
     }
     cout<<this->stock_quantity<<'\n';
-    std::cout<<"Price: $"<<this->get_price_per_product()<<'\n';
+    cout<<"Price: $"<<this->get_price_per_product()<<'\n';
 }
 std::string Videogame::get_genre() {
     return this->genre;
 }
-void Videogame::read(std::istream& is) {
+void Videogame::read(std::istream& is,bool file_read) {
     std::string name,genre;
-    std::cout<<"Enter video game name:\n";
+    if (!file_read)
+        std::cout<<"Enter video game name:\n";
     is.get();
     getline(is,name);
-
-    std::cout<<"Enter genre:\n";
+    if (!file_read)
+        std::cout<<"Enter genre:\n";
     is.get();
     getline(is,genre);
     this->name = name;
     this->genre = genre;
-    std::cout<<"Enter number of compatible consoles:\n";
+    if (!file_read)
+        std::cout<<"Enter number of compatible consoles:\n";
     try {
         int n;
         std::string console;
         is>>n;
         is.get();
         for (int i=0;i<n;i++) {
-            std::cout<<"Enter number of consoles:\n";
+            if (file_read)
+                std::cout<<"Enter number of consoles:\n";
             getline(is,console);
             this->compatible_consoles.push_back(console);
         }
-        Product::read(is);
+        Product::read(is,file_read);
     }catch(std::invalid_argument& e) {
         std::cout<<"Invalid input! Try again\n";
     }
 
 }
 std::istream& operator>>(std::istream& is,Videogame& obj) {
-    obj.read(is);
+    obj.read(is,false);
     return is;
 }
 std::ostream& operator<<(std::ostream& cout,Videogame& obj) {

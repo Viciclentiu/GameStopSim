@@ -41,8 +41,12 @@ void Bundle::display(std::ostream& cout) {
     cout<<this->discount<<'\n';
     cout<<"Available days:"<<'\n';
     for (int i=0;i<this->days_available.size();i++) {
-        std::cout<<this->days_available[i]<<'\n';
+        cout<<this->days_available[i]<<'\n';
     }
+    cout<<"Stock quantity:"<<'\n';
+    cout<<this->stock_quantity<<'\n';
+    cout<<"Stock Price:"<<'\n';
+    cout<<this->stock_price<<'\n';
 }
 float Bundle::price_discount() {
     return (this->get_price_per_product()+this->get_price_per_product()*discount);
@@ -52,14 +56,15 @@ int Bundle::get_last_day_available() {
     sort(this->days_available.begin(),this->days_available.end());
     return this->days_available.back();
 }
-void Bundle::read(std::istream& is) {
+void Bundle::read(std::istream& is,bool file_read) {
     try {
         std::string input;
-        std::cout << "Enter the discount:\n";
+        if (!file_read)
+            std::cout << "Enter the discount:\n";
         std::cin >> input;
         this->discount = std::stof(input);
-
-        std::cout << "Enter number of days available:\n";
+        if (!file_read)
+            std::cout << "Enter number of days available:\n";
         std::cin >> input;
         int days = std::stoi(input);
         for (int i = 0; i < days; i++) {
@@ -69,11 +74,11 @@ void Bundle::read(std::istream& is) {
     } catch (std::invalid_argument& e) {
         std::cout << "Invalid input!\n";
     }
-    Videogame::read(is);
-    Console::read(is);
+    Videogame::read(is,file_read);
+    Console::read(is,file_read);
 }
 std::istream& operator>>(std::istream& is,Bundle& obj) {
-    obj.read(is);
+    obj.read(is,false);
     return is;
 }
 std::ostream& operator<<(std::ostream& cout, Bundle& obj) {

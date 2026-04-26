@@ -15,7 +15,7 @@ protected:
     Product(const Product&);
     virtual ~Product();
     virtual void display(std::ostream& cout) =0;
-    virtual void read(std::istream& is);
+    virtual void read(std::istream& is,bool file_read);
     Product &operator=(const Product &);
     float get_price_per_product();
     int get_stock_quantity();
