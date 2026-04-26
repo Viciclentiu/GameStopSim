@@ -136,3 +136,15 @@ std::istream& operator>>(std::istream& is,Customer& customer) {
         customer.owned_consoles.push_back(console);
     }
 }
+std::ostream& operator<<(std::ostream& os,Customer& customer) {
+    std::cout<<"Name"<< customer.name<<"\n";
+    std::cout<<"Wallet"<< customer.wallet<<"\n";
+    std::cout<<"Preferences:\n";
+    for (int i=0;i<customer.preferences.size();i++) {
+        std::cout<<customer.preferences[i]<<"\n";
+    }
+    std::cout<<"Owned_consoles\n";
+    for (int i=0;i<customer.owned_consoles.size();i++) {
+        std::cout<<customer.owned_consoles[i]<<"\n";
+    }
+}

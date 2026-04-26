@@ -15,6 +15,7 @@ protected:
     Product(const Product&);
     virtual ~Product();
     virtual void display(std::ostream& cout) =0;
+    virtual void read(std::istream& is);
     Product &operator=(const Product &);
     float get_price_per_product();
     int get_stock_quantity();
@@ -22,6 +23,6 @@ protected:
     void set_stock_price(float stock_price);
     void reduce_stock(int amount);
     friend std::istream& operator>>(std::istream& is, Product& p);
-    friend std::ostream& operator<<(std::ostream& os, const Product& p);
+    friend std::ostream& operator<<(std::ostream& os,  Product& p);
 };
 #endif //GAMESTOP_PRODUCT_H

@@ -1,7 +1,7 @@
 #ifndef GAMESTOP_MENU_H
 #define GAMESTOP_MENU_H
 #include <iostream>
-#include <fstream>
+
 #include <vector>
 #include "customer.h"
 #include "videogame.h"

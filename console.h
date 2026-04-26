@@ -18,6 +18,8 @@ public:
     Console(const Console &);
     Console &operator=(const Console &);
     void display(std::ostream& cout) override;
+    void read(std::istream& is) override;
     friend std::istream& operator>>(std::istream& is,Console& obj);
+    friend std::ostream& operator<<(std::ostream& cout,const Console& obj);
 };
 #endif //GAMESTOP_CONSOLE_H

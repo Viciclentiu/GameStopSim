@@ -47,7 +47,7 @@ void Console::display(std::ostream& cout) {
         cout<<this->specs[i]<<'\n';
     }
 }
-std::istream& operator>>(std::istream& is, Console& obj) {
+void Console::read(std::istream& is) {
     std::string name;
     std::string description;
     std::vector<std::string> specs;
@@ -60,14 +60,22 @@ std::istream& operator>>(std::istream& is, Console& obj) {
     std::cout<<"Number of specs: ";
     is>>n;
     is.get();
-    obj.name = name;
-    obj.description = description;
+    this->name = name;
+    this->description = description;
     std::string spec;
     for (int i=0;i<n;i++) {
         std::cout<<"Specs: ";
         getline(is,spec);
-        obj.specs.push_back(spec);
+        this->specs.push_back(spec);
     }
-    is>>(Product&) obj;
+    Product::read(is);
+
+}
+std::istream& operator>>(std::istream& is, Console& obj) {
+   obj.read(is);
     return is;
+}
+std::ostream& operator<<(std::ostream& cout, Console& obj) {
+    obj.display(cout);
+    return cout;
 }

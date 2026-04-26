@@ -33,7 +33,7 @@ void Merchandise::display(std::ostream& cout) {
     cout<<this->stock_price<<'\n';
     cout<<this->stock_quantity<<'\n';
 }
-std::istream& operator>>(std::istream& is, Merchandise& p) {
+void Merchandise::read(std::istream& is) {
     std::cout<<"Type:";
     is.get();
     std::string type,game_origin;
@@ -41,8 +41,15 @@ std::istream& operator>>(std::istream& is, Merchandise& p) {
     getline(is,type);
     std::cout<<"Game origin: ";
     getline(is,game_origin);
-    p.type=type;
-    p.game_origin=game_origin;
-    is>> (Product&) p;
+    this->type=type;
+    this->game_origin=game_origin;
+    Product::read(is);
+}
+std::istream& operator>>(std::istream& is, Merchandise& p) {
+    p.read(is);
     return is;
+}
+std::ostream& operator<<(std::ostream& cout, Merchandise& p) {
+    p.display(cout);
+    return cout;
 }

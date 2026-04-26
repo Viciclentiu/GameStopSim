@@ -46,8 +46,7 @@ void Product::set_stock_price(float stock_price) {
     this->stock_price = stock_price;
 }
 
-
-std::istream& operator>>(std::istream& is, Product& p) {
+void  Product::read(std::istream& is) {
     try {
         std::string stock_price;
         std::string stock_quantity;
@@ -59,11 +58,17 @@ std::istream& operator>>(std::istream& is, Product& p) {
         getline(is,stock_price);
         int stock_quant = std::stoi(stock_quantity);
         float price = std::stof(stock_price);
-        p.stock_quantity= stock_quant;
-        p.stock_price = price;
+        this->stock_quantity= stock_quant;
+        this->stock_price = price;
     }catch (std::invalid_argument& e) {
         std::cout<<"Invalid input"<<'\n';
     }
-
+}
+std::istream& operator>>(std::istream& is, Product& p) {
+    p.read(is);
     return is;
+}
+std:: ostream& operator<<(std::ostream& os, Product &p) {
+    p.display(os);
+    return os;
 }

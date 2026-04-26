@@ -15,8 +15,10 @@ public:
     ~Bundle();
     Bundle& operator=(const Bundle &);
     void display(std::ostream& cout) override;
+    void read(std::istream& is) override;
     float price_discount();
     int get_last_day_available();
     friend std::istream& operator>>(std::istream& is,Bundle& obj);
+    friend std::ostream& operator<<(std::ostream& cout,const Bundle& obj);
 };
 #endif //GAMESTOP_BUNDLE_H

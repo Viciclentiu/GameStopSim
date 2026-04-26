@@ -51,7 +51,7 @@ void Videogame::display(std::ostream& cout) {
 std::string Videogame::get_genre() {
     return this->genre;
 }
-std::istream& operator>>(std::istream& is,Videogame& obj) {
+void Videogame::read(std::istream& is) {
     std::string name,genre;
     std::cout<<"Enter video game name:\n";
     is.get();
@@ -60,19 +60,30 @@ std::istream& operator>>(std::istream& is,Videogame& obj) {
     std::cout<<"Enter genre:\n";
     is.get();
     getline(is,genre);
-    obj.name = name;
-    obj.genre = genre;
-    std::cout<<"Enter compatible consoles:\n";
+    this->name = name;
+    this->genre = genre;
+    std::cout<<"Enter number of compatible consoles:\n";
+    try {
+        int n;
+        std::string console;
+        is>>n;
+        is.get();
+        for (int i=0;i<n;i++) {
+            std::cout<<"Enter number of consoles:\n";
+            getline(is,console);
+            this->compatible_consoles.push_back(console);
+        }
+        Product::read(is);
+    }catch(std::invalid_argument& e) {
+        std::cout<<"Invalid input! Try again\n";
+    }
 
-    int n;
-    std::string console;
-    is>>n;
-    is.get();
-    for (int i=0;i<n;i++) {
-        is>>console;
-        obj.compatible_consoles.push_back(console);
-    };
-
-    is >> static_cast<Product&>(obj);
+}
+std::istream& operator>>(std::istream& is,Videogame& obj) {
+    obj.read(is);
     return is;
+}
+std::ostream& operator<<(std::ostream& cout,Videogame& obj) {
+    obj.display(cout);
+    return cout;
 }

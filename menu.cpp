@@ -1,5 +1,5 @@
 #include "menu.h"
-
+#include <fstream>
 Menu::~Menu() {
     for (Product * p : inventory) {
         delete p;
@@ -25,6 +25,8 @@ void Menu::displayMenu() {
     std::cout << "3. See the store's stock\n";
     std::cout << "4. See its funds\n";
     std::cout << "5. Make a bundle\n";
+    std::cout << "6.Save current Inventory\n";
+    std::cout << "7. Load current Inventory\n";
     std::cout << "0. Exit\n";
     std::cout << "Select your choice: ";
 }
@@ -148,6 +150,11 @@ void Menu::run() {
                 case 5:
                     this->make_bundle();
                     break;
+                case 6:
+                    this->save_inventory();
+                    break;
+                case 7:
+                    this->load_inventory();
                 case 0:
                     std::cout<<"Exiting program... Goodbye!\n";
                     this->running = false;

@@ -52,24 +52,31 @@ int Bundle::get_last_day_available() {
     sort(this->days_available.begin(),this->days_available.end());
     return this->days_available.back();
 }
-std::istream& operator>>(std::istream& is,Bundle& obj) {
+void Bundle::read(std::istream& is) {
     try {
         std::string input;
         std::cout << "Enter the discount:\n";
         std::cin >> input;
-        obj.discount = std::stof(input);
+        this->discount = std::stof(input);
 
         std::cout << "Enter number of days available:\n";
         std::cin >> input;
         int days = std::stoi(input);
         for (int i = 0; i < days; i++) {
             std::cin >> input;
-            obj.days_available.push_back(std::stoi(input));
+            this->days_available.push_back(std::stoi(input));
         }
     } catch (std::invalid_argument& e) {
         std::cout << "Invalid input!\n";
     }
-    operator>>(is, static_cast<Videogame&>(obj));
-    operator>>(is, static_cast<Console&>(obj));
+    Videogame::read(is);
+    Console::read(is);
+}
+std::istream& operator>>(std::istream& is,Bundle& obj) {
+    obj.read(is);
     return is;
+}
+std::ostream& operator<<(std::ostream& cout, Bundle& obj) {
+    obj.display(cout);
+    return cout;
 }
