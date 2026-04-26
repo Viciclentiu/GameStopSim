@@ -36,7 +36,7 @@
 *.exe
 *.out
 *.app
-
+*.txt
 # debug information files
 *.dwo
 Unnamed.run.xml
