@@ -46,8 +46,11 @@ void Merchandise::serialize(std::ostream& os) {
     os<<this->stock_quantity<<'\n';
 }
 void Merchandise::read(std::istream& is, bool file_read) {
-    if (!file_read)
+    if (!file_read) {
         std::cout<<"Type:";
+    }
+
+    is.ignore();
     std::string type,game_origin;
 
     getline(is,type);

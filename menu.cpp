@@ -146,7 +146,6 @@ void Menu::save_inventory() {
     for (Product* p : inventory) {
         p->serialize(fout);
     }
-    fout<<"test"<<'\n';
     fout.close();
     std::cout<<"Data saved in " << FILE << "\n";
 

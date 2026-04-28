@@ -50,7 +50,7 @@ void Bundle::serialize(std::ostream& os) {
 }
 void Bundle::display(std::ostream& cout) {
     cout<<"Bundle"<<'\n';
-    cout<<this->discount<<'\n';
+    cout<<this->discount<<"%"<<'\n';
     cout<<"Available days:"<<'\n';
     for (int i=0;i<this->days_available.size();i++) {
         cout<<this->days_available[i]<<'\n';

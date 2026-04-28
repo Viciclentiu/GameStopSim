@@ -66,6 +66,7 @@ void Videogame::read(std::istream& is,bool file_read) {
     std::string name,genre;
     if (!file_read)
         std::cout<<"Enter video game name:\n";
+    is.ignore();
     getline(is,name);
     if (!file_read)
         std::cout<<"Enter genre:\n";
