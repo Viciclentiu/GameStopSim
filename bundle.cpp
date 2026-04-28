@@ -4,7 +4,6 @@
 #include <algorithm>
 Bundle::Bundle() :Videogame() ,Console() {
     this->discount = 0.0;
-    this->days_available.push_back(0);
 
 }
 
@@ -45,8 +44,7 @@ void Bundle::serialize(std::ostream& os) {
     }
     Videogame::serialize(os);
     Console::serialize(os);
-    os<<this->stock_quantity<<'\n';
-    os<<this->stock_price<<'\n';
+
 }
 void Bundle::display(std::ostream& cout) {
     cout<<"Bundle"<<'\n';
@@ -85,22 +83,14 @@ void Bundle::read(std::istream& is,bool file_read) {
         for (int i = 0; i < days; i++) {
             getline(is,input);
             int day = std::stoi(input);
-            this->days_available.push_back(std::stoi(input));
+            this->days_available.push_back(day);
         }
-        if (!file_read)
-            std::cout << "Enter stock quantity:\n";
-        getline(is,input);
-
-        this->stock_quantity = std::stoi(input);
-        if (!file_read)
-            std::cout << "Enter stock price:\n";
-        getline(is,input);
-        this->stock_price = std::stof(input);
+        Videogame::read(is,file_read);
+        Console::read(is,file_read);
     } catch (std::invalid_argument& e) {
         std::cout << "Invalid input!\n";
     }
-    Videogame::read(is,file_read);
-    Console::read(is,file_read);
+
 
 }
 std::istream& operator>>(std::istream& is,Bundle& obj) {
