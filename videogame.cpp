@@ -41,6 +41,7 @@ void Videogame::serialize(std::ostream& os) {
     os<<"Videogame"<<'\n';
     os<<this->name<<'\n';
     os<<this->genre<<'\n';
+    os<<this->compatible_consoles.size()<<'\n';
     for (int i=0;i<this->compatible_consoles.size();i++) {
         os<<this->compatible_consoles[i]<<'\n';
     }

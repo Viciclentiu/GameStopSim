@@ -43,6 +43,7 @@ void Console::serialize(std::ostream& os) {
     os<<"Console"<<'\n';
     os<<this->name<<'\n';
     os<<this->description<<'\n';
+    os<<this->specs.size()<<'\n';
     for (int i =0; i<this->specs.size();i++) {
         os<<this->specs[i]<<'\n';
     }

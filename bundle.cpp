@@ -39,6 +39,7 @@ Bundle& Bundle::operator=(const Bundle& obj) {
 void Bundle::serialize(std::ostream& os) {
     os<<"Bundle"<<'\n';
     os<<this->discount<<'\n';
+    os<<this->days_available.size()<<'\n';
     for (int i=0;i<this->days_available.size();i++) {
         os<<this->days_available[i]<<'\n';
     }
