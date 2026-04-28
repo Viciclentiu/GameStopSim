@@ -1,5 +1,6 @@
 #include "menu.h"
 #include <fstream>
+#include <windows.h>
 Menu::~Menu() {
     for (Product * p : inventory) {
         delete p;
@@ -117,6 +118,23 @@ void Menu::customer_visit() {
         }
 
     }
+    try {
+        Customer seller("Larry",rand()%500, {"Shooter","Western"},{"PC","PS5"});
+        Product *prod = inventory[rand()%10];
+        float offer = seller.trade_in(prod);
+        if (this->funds < offer) {
+            throw std::runtime_error("Store has insufficient funds for this trade-in");
+        }
+        this->funds-=offer;
+        seller.set_wallet(seller.get_wallet()+offer);
+        std::cout<<"Customer"<< seller.get_name()<<"has entered the store for a trade in...\n";
+        std::cout<<"He wants to trade ";
+        prod->display(std::cout);
+        std::cout << "Trade-in complete! Customer received: $" << offer << "\n";
+    }catch (std::runtime_error& e) {
+        std::cout << "Trade-in failed" << '\n';
+    }
+
 }
 void Menu::save_inventory() {
     const std::string FILE = "inventory.txt";
@@ -181,14 +199,17 @@ void Menu::run() {
             choice = std::stoi(input);
             switch (choice) {
                 case 1: {
+                    system("cls");
                     this->customer_visit();
                     break;
                 }
                 case 2: {
+                    system("cls");
                     add_product();
                     break;
                 }
                 case 3: {
+                    system("cls");
                     std::cout<<"\n ----CURRENT STOCK ---- \n";
                     for (Product* p : inventory) {
                         p->display(std::cout);
@@ -197,15 +218,19 @@ void Menu::run() {
                     break;
                 }
                 case 4:
+                    system("cls");
                     std::cout<<"Store Funds: $"<<this->funds<<"\n";
                     break;
                 case 5:
+                    system("cls");
                     this->make_bundle();
                     break;
                 case 6:
+                    system("cls");
                     this->save_inventory();
                     break;
                 case 7:
+                    system("cls");
                     this->load_inventory();
                     break;
                 case 0:

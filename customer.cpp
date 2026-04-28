@@ -65,12 +65,12 @@ bool Customer::decide_purchase(Product* p) {
             if (v->get_genre() == pref) {
                 return true;
             }
-            else {
-                return false;
-            }
         }
     }
-    return true;
+    else {
+        return true;
+    }
+    return false;
 }
 float Customer::calculate_satisfaction(std::vector<Product*>& cart) {
     int purchased_products=0;
@@ -81,7 +81,7 @@ float Customer::calculate_satisfaction(std::vector<Product*>& cart) {
             purchased_products++;
         }
     }
-    return (float)(purchased_products/cart.size()) * 100.0;
+    return (float) purchased_products/cart.size() * 100.0f;
 }
 
 float Customer::trade_in(Product *p) {
@@ -96,10 +96,10 @@ float Customer::trade_in(Product *p) {
 
     return offer;
 }
-std::string Customer::get_name() {
+std::string Customer::get_name() const {
     return this->name;
 }
-float Customer::get_wallet() {
+float Customer::get_wallet() const {
     return this->wallet;
 }
 void Customer::set_wallet(float new_ammount) {
@@ -135,16 +135,18 @@ std::istream& operator>>(std::istream& is,Customer& customer) {
         getline(is,console);
         customer.owned_consoles.push_back(console);
     }
+    return is;
 }
-std::ostream& operator<<(std::ostream& os,Customer& customer) {
-    std::cout<<"Name"<< customer.name<<"\n";
-    std::cout<<"Wallet"<< customer.wallet<<"\n";
-    std::cout<<"Preferences:\n";
+std::ostream& operator<<(std::ostream& cout,Customer& customer) {
+    cout<<"Name"<< customer.name<<"\n";
+    cout<<"Wallet"<< customer.wallet<<"\n";
+    cout<<"Preferences:\n";
     for (int i=0;i<customer.preferences.size();i++) {
-        std::cout<<customer.preferences[i]<<"\n";
+        cout<<customer.preferences[i]<<"\n";
     }
-    std::cout<<"Owned_consoles\n";
+    cout<<"Owned_consoles\n";
     for (int i=0;i<customer.owned_consoles.size();i++) {
-        std::cout<<customer.owned_consoles[i]<<"\n";
+        cout<<customer.owned_consoles[i]<<"\n";
     }
+    return cout;
 }

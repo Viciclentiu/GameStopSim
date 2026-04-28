@@ -19,8 +19,8 @@ public:
     bool decide_purchase(Product* p);
     float calculate_satisfaction(std::vector<Product*>& cart);
     float trade_in(Product* p);
-    std::string get_name();
-    float get_wallet();
+    std::string get_name() const;
+    float get_wallet() const;
     void set_wallet(float new_wallet);
     friend std::istream& operator>>(std::istream& is,Customer& customer);
     friend std::ostream& operator<<(std::ostream& os, Customer& customer);

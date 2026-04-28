@@ -15,7 +15,7 @@ public:
     virtual ~Videogame();
     Videogame &operator=(const Videogame &);
     Videogame(const Videogame& obj);
-    std::string get_genre();
+    std::string get_genre() const;
     void display(std::ostream& cout) override;
     void read(std::istream& is,bool file_read) override;
     friend std::istream& operator>>(std::istream& is,Videogame& obj);

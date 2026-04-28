@@ -46,9 +46,9 @@ void Videogame::display(std::ostream& cout) {
         cout<<this->compatible_consoles[i]<<'\n';
     }
     cout<<this->stock_quantity<<'\n';
-    cout<<"Price: $"<<this->get_price_per_product()<<'\n';
+    cout<<this->stock_price<<'\n';
 }
-std::string Videogame::get_genre() {
+std::string Videogame::get_genre() const{
     return this->genre;
 }
 void Videogame::read(std::istream& is,bool file_read) {
@@ -59,7 +59,6 @@ void Videogame::read(std::istream& is,bool file_read) {
     getline(is,name);
     if (!file_read)
         std::cout<<"Enter genre:\n";
-    is.get();
     getline(is,genre);
     this->name = name;
     this->genre = genre;

@@ -16,7 +16,7 @@ public:
     Merchandise();
     Merchandise(std::string type, std::string game_origin,int stock_price,int stock_quantity);
     Merchandise(const Merchandise& merch);
-    ~Merchandise();
+    virtual ~Merchandise();
     Merchandise& operator=(const Merchandise& merch);
     void display(std::ostream& cout);
     void read(std::istream& is, bool file_read);

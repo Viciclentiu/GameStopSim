@@ -30,6 +30,7 @@ Bundle& Bundle::operator=(const Bundle& obj) {
     Videogame::operator=(obj);
     Console::operator=(obj);
     this->discount = obj.discount;
+    this->days_available.clear();
     for (int i=0;i<obj.days_available.size();i++) {
         this->days_available.push_back(obj.days_available[i]);
     }

@@ -33,6 +33,7 @@ Console& Console::operator=(const Console& obj) {
     Product::operator=(obj);
     this->name = obj.name;
     this->description = obj.description;
+    this->specs.clear();
     for (int i=0;i<obj.specs.size();i++) {
         this->specs.push_back(obj.specs[i]);
     }
@@ -61,18 +62,23 @@ void Console::read(std::istream& is,bool file_read) {
     int n;
     if (!file_read)
         std::cout<<"Number of specs: ";
-    is>>n;
-    is.get();
-    this->name = name;
-    this->description = description;
-    std::string spec;
-    for (int i=0;i<n;i++) {
-        if (!file_read)
-            std::cout<<"Specs: ";
-        getline(is,spec);
-        this->specs.push_back(spec);
+    try {
+        is>>n;
+        is.get();
+        this->name = name;
+        this->description = description;
+        std::string spec;
+        for (int i=0;i<n;i++) {
+            if (!file_read)
+                std::cout<<"Specs: ";
+            getline(is,spec);
+            this->specs.push_back(spec);
+        }
+        Product::read(is,file_read);
+    }catch (std::invalid_argument& e) {
+        std::cout<<"Please input a number\n";
     }
-    Product::read(is,file_read);
+
 
 }
 std::istream& operator>>(std::istream& is, Console& obj) {
