@@ -120,7 +120,7 @@ void Menu::customer_visit() {
     }
     try {
         Customer seller("Larry",rand()%500, {"Shooter","Western"},{"PC","PS5"});
-        Product *prod = inventory[rand()%10];
+        Product *prod = inventory[rand()%inventory.size()];
         float offer = seller.trade_in(prod);
         if (this->funds < offer) {
             throw std::runtime_error("Store has insufficient funds for this trade-in");
@@ -144,7 +144,7 @@ void Menu::save_inventory() {
     }
     fout << inventory.size() << "\n";
     for (Product* p : inventory) {
-        p->display(fout);
+        p->serialize(fout);
     }
     fout<<"test"<<'\n';
     fout.close();

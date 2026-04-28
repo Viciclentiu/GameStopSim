@@ -15,6 +15,7 @@ public:
     ~Bundle();
     Bundle& operator=(const Bundle &);
     void display(std::ostream& cout) override;
+    void serialize(std::ostream& os);
     void read(std::istream& is,bool file_read) override;
     float price_discount();
     int get_last_day_available();

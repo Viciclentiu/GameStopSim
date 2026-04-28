@@ -28,10 +28,22 @@ Merchandise& Merchandise::operator=(const Merchandise &obj) {
 }
 void Merchandise::display(std::ostream& cout) {
     cout<<"Merchandise"<<'\n';
+    cout<<"Type: ";
     cout<<this->type<<'\n';
+    cout<<"Origin: ";
     cout<<this->game_origin<<'\n';
-    cout<<this->stock_price<<'\n';
+    cout<<"Quantity: ";
     cout<<this->stock_quantity<<'\n';
+    cout<<"Stock Price: ";
+    cout<<this->stock_price<<'\n';
+
+}
+void Merchandise::serialize(std::ostream& os) {
+    os<<"Merchandise"<<'\n';
+    os<<this->type<<'\n';
+    os<<this->game_origin<<'\n';
+    os<<this->stock_price<<'\n';
+    os<<this->stock_quantity<<'\n';
 }
 void Merchandise::read(std::istream& is, bool file_read) {
     if (!file_read)

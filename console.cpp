@@ -39,6 +39,16 @@ Console& Console::operator=(const Console& obj) {
     }
     return *this;
 }
+void Console::serialize(std::ostream& os) {
+    os<<"Console"<<'\n';
+    os<<this->name<<'\n';
+    os<<this->description<<'\n';
+    for (int i =0; i<this->specs.size();i++) {
+        os<<this->specs[i]<<'\n';
+    }
+    os<<this->stock_quantity<<'\n';
+    os<<this->stock_price<<'\n';
+}
 void Console::display(std::ostream& cout) {
     cout<<"Console"<<'\n';
     cout<<this->name<<'\n';
@@ -47,6 +57,8 @@ void Console::display(std::ostream& cout) {
     for (int i =0; i<this->specs.size();i++) {
         cout<<this->specs[i]<<'\n';
     }
+    cout<<"Stock Quantity:"<<this->stock_quantity<<'\n';
+    cout<<"Price:"<<this->stock_price<<'\n';
 }
 void Console::read(std::istream& is,bool file_read) {
     std::string name;
@@ -54,7 +66,6 @@ void Console::read(std::istream& is,bool file_read) {
     std::vector<std::string> specs;
     if (!file_read)
         std::cout<<"Name: ";
-    is.get();
     getline(is,name);
     if (!file_read)
         std::cout<<"Description: ";
@@ -88,4 +99,7 @@ std::istream& operator>>(std::istream& is, Console& obj) {
 std::ostream& operator<<(std::ostream& cout, Console& obj) {
     obj.display(cout);
     return cout;
+}
+std::string Console::get_name() const {
+    return this->name;
 }

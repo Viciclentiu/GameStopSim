@@ -37,6 +37,16 @@ Videogame& Videogame::operator=(const Videogame& obj) {
 
     return *this;
 }
+void Videogame::serialize(std::ostream& os) {
+    os<<"Videogame"<<'\n';
+    os<<this->name<<'\n';
+    os<<this->genre<<'\n';
+    for (int i=0;i<this->compatible_consoles.size();i++) {
+        os<<this->compatible_consoles[i]<<'\n';
+    }
+    os<<this->stock_quantity<<'\n';
+    os<<this->stock_price<<'\n';
+}
 void Videogame::display(std::ostream& cout) {
     cout<<"Videogame"<<'\n';
     cout<<this->name<<'\n';
@@ -55,7 +65,6 @@ void Videogame::read(std::istream& is,bool file_read) {
     std::string name,genre;
     if (!file_read)
         std::cout<<"Enter video game name:\n";
-    is.get();
     getline(is,name);
     if (!file_read)
         std::cout<<"Enter genre:\n";
@@ -88,4 +97,7 @@ std::istream& operator>>(std::istream& is,Videogame& obj) {
 std::ostream& operator<<(std::ostream& cout,Videogame& obj) {
     obj.display(cout);
     return cout;
+}
+std::string Videogame::get_name() const {
+    return this->name;
 }

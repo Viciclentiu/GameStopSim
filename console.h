@@ -18,7 +18,9 @@ public:
     Console(const Console &);
     Console &operator=(const Console &);
     void display(std::ostream& cout) override;
+    void serialize(std::ostream& os) override;
     void read(std::istream& is,bool file_read) override;
+    std::string get_name() const;
     friend std::istream& operator>>(std::istream& is,Console& obj);
     friend std::ostream& operator<<(std::ostream& cout,const Console& obj);
 };

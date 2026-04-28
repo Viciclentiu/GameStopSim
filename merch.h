@@ -18,7 +18,8 @@ public:
     Merchandise(const Merchandise& merch);
     virtual ~Merchandise();
     Merchandise& operator=(const Merchandise& merch);
-    void display(std::ostream& cout);
+    void display(std::ostream& cout) override;
+    void serialize(std::ostream& os) override;
     void read(std::istream& is, bool file_read);
     friend std::istream& operator>>(std::istream& is, Merchandise& p);
     friend std::ostream& operator<<(std::ostream& cout,const Merchandise& p);

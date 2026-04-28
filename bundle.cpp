@@ -36,7 +36,17 @@ Bundle& Bundle::operator=(const Bundle& obj) {
     }
     return *this;
 }
-
+void Bundle::serialize(std::ostream& os) {
+    os<<"Bundle"<<'\n';
+    os<<this->discount<<'\n';
+    for (int i=0;i<this->days_available.size();i++) {
+        os<<this->days_available[i]<<'\n';
+    }
+    Videogame::serialize(os);
+    Console::serialize(os);
+    os<<this->stock_quantity<<'\n';
+    os<<this->stock_price<<'\n';
+}
 void Bundle::display(std::ostream& cout) {
     cout<<"Bundle"<<'\n';
     cout<<this->discount<<'\n';
@@ -44,6 +54,9 @@ void Bundle::display(std::ostream& cout) {
     for (int i=0;i<this->days_available.size();i++) {
         cout<<this->days_available[i]<<'\n';
     }
+    Videogame::display(cout);
+    cout<<'\n';
+    Console::display(cout);
     cout<<"Stock quantity:"<<'\n';
     cout<<this->stock_quantity<<'\n';
     cout<<"Stock Price:"<<'\n';
