@@ -76,21 +76,32 @@ void Bundle::read(std::istream& is,bool file_read) {
         std::string input;
         if (!file_read)
             std::cout << "Enter the discount:\n";
-        std::cin >> input;
+        getline(is,input);
         this->discount = std::stof(input);
         if (!file_read)
             std::cout << "Enter number of days available:\n";
-        std::cin >> input;
+        getline(is,input);
         int days = std::stoi(input);
         for (int i = 0; i < days; i++) {
-            std::cin >> input;
+            getline(is,input);
+            int day = std::stoi(input);
             this->days_available.push_back(std::stoi(input));
         }
+        if (!file_read)
+            std::cout << "Enter stock quantity:\n";
+        getline(is,input);
+
+        this->stock_quantity = std::stoi(input);
+        if (!file_read)
+            std::cout << "Enter stock price:\n";
+        getline(is,input);
+        this->stock_price = std::stof(input);
     } catch (std::invalid_argument& e) {
         std::cout << "Invalid input!\n";
     }
     Videogame::read(is,file_read);
     Console::read(is,file_read);
+
 }
 std::istream& operator>>(std::istream& is,Bundle& obj) {
     obj.read(is,false);
