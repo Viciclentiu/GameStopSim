@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 
+#include "bundle.h"
 #include "videogame.h"
 
 Customer::Customer() {
@@ -65,6 +66,12 @@ bool Customer::decide_purchase(Product* p) {
             if (v->get_genre() == pref) {
                 return true;
             }
+        }
+    }
+    else if (Bundle* b = dynamic_cast<Bundle*>(p)) {
+        market_cap = b->price_discount()*1.2;
+        if (this->wallet <= market_cap * 1.2 ) {
+            return false;
         }
     }
     else {

@@ -89,8 +89,14 @@ void Menu::customer_visit() {
         cart.push_back(p);
         if (visitor.decide_purchase(p)) {
             p->reduce_stock(1);
-            visitor.set_wallet(visitor.get_wallet() - p->get_price_per_product()* 1.2);
-            profit+= p->get_price_per_product()*1.2;
+            float price;
+            if (Bundle* b= dynamic_cast<Bundle*>(p))
+                price = b->price_discount()*1.2;
+            else {
+                price = p->get_price_per_product() *1.2;
+            }
+            visitor.set_wallet(visitor.get_wallet() - price);
+            profit+= price;
             bought= true;
             std::cout<<"[Sale] " << visitor.get_name()<<" bought ";
             p->display(std::cout);

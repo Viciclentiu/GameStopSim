@@ -62,7 +62,7 @@ void Bundle::display(std::ostream& cout) {
     cout<<this->stock_price<<'\n';
 }
 float Bundle::price_discount() {
-    return (this->get_price_per_product()+this->get_price_per_product()*discount);
+    return (this->get_price_per_product()-this->get_price_per_product()*discount/100.0f);
 }
 
 int Bundle::get_last_day_available() {
